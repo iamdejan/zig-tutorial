@@ -7,6 +7,9 @@ const std = @import("std");
 /// - A for-loop that iterates from 1 to 100 (inclusive),
 /// converting each integer to a float using @floatFromInt.
 /// This program does not return an error under normal circumstances.
+/// - A for-loop that iterates over an array/slice of strings,
+/// printing each message to the console.
+/// This program does not return an error under normal circumstances.
 pub fn main() !void {
     // Integer example: 32-bit signed integer
     const my_int: i32 = 42;
@@ -35,5 +38,19 @@ pub fn main() !void {
         const float_value: f64 = @floatFromInt(i);
 
         std.debug.print("Integer: {} -> Float: {:.2}\n", .{ i, float_value });
+    }
+
+    // For-loop over an array of strings
+    // String literals in Zig are slices of bytes ([]const u8)
+    // We create an anonymous array literal and coerce it to a slice
+    const messages = &[_][]const u8{
+        "This is me,",
+        "your lost child.",
+        "I've been waiting for you",
+    };
+
+    // Iterate over each string in the slice
+    for (messages) |message| {
+        std.debug.print("Message: {s}\n", .{message});
     }
 }
