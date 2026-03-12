@@ -1,5 +1,24 @@
 const std = @import("std");
 
+/// Demonstrates basic variable types in Zig: integer, float, and string.
+/// This program shows how to declare and print variables of different types.
+/// It does not return an error under normal circumstances.
 pub fn main() !void {
-    std.debug.print("{s}\n", "Hello world");
+    // Integer example: 32-bit signed integer
+    const my_int: i32 = 42;
+    // Float example: 64-bit floating-point number
+    const my_float: f64 = 3.14;
+    // String example: string literals are slices of bytes ([]const u8)
+    const my_string: []const u8 = "Hello, Zig!";
+
+    // Print integer value
+    std.debug.print("Integer: {d}\n", .{my_int});
+
+    // Format float to two decimal places for printing
+    var float_buf: [32]u8 = undefined;
+    const float_str = try std.fmt.bufPrint(&float_buf, "{:.2}", .{my_float});
+    std.debug.print("Float: {s}\n", .{float_str});
+
+    // Print string value
+    std.debug.print("String: {s}\n", .{my_string});
 }

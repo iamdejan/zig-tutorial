@@ -10,8 +10,6 @@ pub fn build(b: *std.Build) void {
         .root_source_file = b.path("src/main.zig"),
         .target = target,
         .optimize = .ReleaseSafe,
-        .link_libc = true,
-        .link_libcpp = true,
     });
 
     const exe = b.addExecutable(.{
@@ -32,8 +30,6 @@ pub fn build(b: *std.Build) void {
         .root_source_file = b.path("src/tests.zig"),
         .target = target,
         .optimize = .ReleaseSafe,
-        .link_libc = true,
-        .link_libcpp = true,
     });
 
     // Create a "test" step to run all tests with `zig build test`
