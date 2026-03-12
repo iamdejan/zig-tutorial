@@ -124,7 +124,7 @@ pub fn main() !void {
     Printer.fmt("\n", .{});
     try slowest.display();
     Printer.fmt("\n", .{});
-    std.posix.exit(if (fail == 0) 0 else 1);
+    std.posix.exit(if (fail == 0 and leak == 0) 0 else 1);
 }
 
 const Printer = struct {

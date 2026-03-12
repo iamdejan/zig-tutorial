@@ -25,6 +25,29 @@ pub fn fibonacci(n: u32) u64 {
     return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
+/// Demonstrates safe memory management by allocating and properly freeing memory.
+///
+/// This function shows the correct approach to memory management in Zig:
+/// 1. Allocate memory using an allocator
+/// 2. Write data to the allocated memory
+/// 3. Free the memory before returning to prevent leaks
+///
+/// Parameters:
+/// - allocator: The allocator to use for memory allocation
+///
+/// Returns:
+/// A boolean indicating success (always true in this example)
+pub fn safeMemoryManagement(allocator: std.mem.Allocator) !void {
+    // Allocate memory for a string
+    const buffer = try allocator.alloc(u8, 100);
+    // Free the memory before returning to prevent leaks
+    defer allocator.free(buffer);
+
+    // Write data to the allocated memory
+    const message = "This memory will be properly freed!";
+    @memcpy(buffer[0..message.len], message);
+}
+
 /// Demonstrates:
 /// - Basic variable types in Zig: integer, float, and string.
 /// This program shows how to declare and print variables of different types.

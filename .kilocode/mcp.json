@@ -1,1 +1,15 @@
-{"mcpServers":{"zignet":{"command":"npx","args":["-y","zignet"],"disabled":false,"alwaysAllow":["get_zig_docs"]}}}
+{
+    "mcpServers": {
+        "zignet": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "zignet"
+            ],
+            "disabled": false,
+            "alwaysAllow": [
+                "get_zig_docs"
+            ]
+        }
+    }
+}

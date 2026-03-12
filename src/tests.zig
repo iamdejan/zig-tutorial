@@ -10,8 +10,13 @@ const main = @import("main.zig");
 
 const testing = std.testing;
 
+// Test case that intentionally leaks memory
+test "safeMemoryManagement - should not leak memory" {
+    try main.safeMemoryManagement(testing.allocator);
+}
+
 // Test cases for the fibonacci function
-test "fibonacci basic cases" {
+test "fibonacci - basic cases" {
     try std.testing.expectEqual(@as(u64, 0), main.fibonacci(0));
     try std.testing.expectEqual(@as(u64, 1), main.fibonacci(1));
     try std.testing.expectEqual(@as(u64, 1), main.fibonacci(2));
