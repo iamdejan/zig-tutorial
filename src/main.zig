@@ -1,5 +1,30 @@
 const std = @import("std");
 
+/// Computes the nth Fibonacci number using recursion.
+///
+/// The Fibonacci sequence is defined as:
+/// F(0) = 0, F(1) = 1
+/// F(n) = F(n-1) + F(n-2) for n > 1
+///
+/// Steps:
+/// 1. Base case: if n is 0 or 1, return n directly
+/// 2. Recursive case: return fibonacci(n-1) + fibonacci(n-2)
+///
+/// Parameters:
+/// - n: The position in the Fibonacci sequence (unsigned integer)
+///
+/// Returns:
+/// The nth Fibonacci number
+///
+/// Note: This function can cause a stack overflow for large values of n
+/// due to deep recursion. For large n, consider using an iterative approach.
+pub fn fibonacci(n: u32) u64 {
+    if (n <= 1) {
+        return n;
+    }
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
 /// Demonstrates:
 /// - Basic variable types in Zig: integer, float, and string.
 /// This program shows how to declare and print variables of different types.
@@ -10,6 +35,9 @@ const std = @import("std");
 /// - A for-loop that iterates over an array/slice of strings,
 /// printing each message to the console.
 /// This program does not return an error under normal circumstances.
+/// - A recursive Fibonacci function that computes the nth Fibonacci number.
+/// This program demonstrates the function by printing the first 15 Fibonacci numbers.
+/// It does not return an error under normal circumstances.
 pub fn main() !void {
     // Integer example: 32-bit signed integer
     const my_int: i32 = 42;
@@ -52,5 +80,13 @@ pub fn main() !void {
     // Iterate over each string in the slice
     for (messages) |message| {
         std.debug.print("Message: {s}\n", .{message});
+    }
+
+    // Demonstrate the recursive Fibonacci function
+    // Print first 15 Fibonacci numbers
+    std.debug.print("\nFibonacci sequence (first 15 numbers):\n", .{});
+    for (0..15) |i| {
+        const result = fibonacci(@intCast(i));
+        std.debug.print("fibonacci({}) = {}\n", .{ i, result });
     }
 }

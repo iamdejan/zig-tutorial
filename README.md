@@ -30,6 +30,7 @@ Use the following command to build and run the project:
 | Command | Description |
 |---------|-------------|
 | `pixi run start` | Build and run the program |
+| `pixi run test` | Build and run unit tests |
 | `pixi run fmt` | Format the code using zig fmt |
 | `pixi run lint-ci` | Run lint check (runs fmt check only) |
 | `pixi run lint-fix` | Auto-fix formatting issues |
@@ -81,7 +82,7 @@ This section explains the purpose of each file in the repository:
 
 | File | Description |
 |------|-------------|
-| [`src/main.zig`](src/main.zig) | Main entry point of the application. Demonstrates using C++ STL containers (unordered_set, unordered_map, priority_queue) via Zig wrappers. |
+| [`src/main.zig`](src/main.zig) | Main entry point of the application. Demonstrates basic Zig concepts including variables (integer, float, string), for-loops, and a recursive Fibonacci function implementation with unit tests. |
 | [`src/tests.zig`](src/tests.zig) | Test aggregation file that imports modules with tests and re-declares them for test runner discovery. Contains 8 unit tests covering message and STL functionality. |
 | [`src/stl.zig`](src/stl.zig) | Zig wrappers for C++ STL containers. Provides `UnorderedSetInt`, `UnorderedMapIntInt`, and `PriorityQueueInt` structs that wrap C++ STL containers. |
 | [`src/test_runner.zig`](src/test_runner.zig) | Custom test runner with colored output, slow test tracking, and memory leak detection. |

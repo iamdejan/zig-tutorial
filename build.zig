@@ -24,4 +24,22 @@ pub fn build(b: *std.Build) void {
     const run_cmd = b.addRunArtifact(exe);
     const run_step = b.step("run", "Run the app");
     run_step.dependOn(&run_cmd.step);
+
+    // Create a "test" step to run unit tests with `zig build test`
+    // First, create a module for the test
+    const test_module = b.createModule(.{
+        .root_source_file = b.path("src/tests.zig"),
+        .target = target,
+        .optimize = .ReleaseSafe,
+    });
+
+    // Create a "test" step to run all tests with `zig build test`
+    const tests = b.addTest(.{
+        .root_module = test_module,
+        .test_runner = .{ .path = b.path("src/test_runner.zig"), .mode = .simple },
+    });
+
+    const run_tests = b.addRunArtifact(tests);
+    const test_step = b.step("test", "Run unit tests");
+    test_step.dependOn(&run_tests.step);
 }
