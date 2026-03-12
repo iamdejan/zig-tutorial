@@ -1,8 +1,12 @@
 const std = @import("std");
 
-/// Demonstrates basic variable types in Zig: integer, float, and string.
+/// Demonstrates:
+/// - Basic variable types in Zig: integer, float, and string.
 /// This program shows how to declare and print variables of different types.
 /// It does not return an error under normal circumstances.
+/// - A for-loop that iterates from 1 to 100 (inclusive),
+/// converting each integer to a float using @floatFromInt.
+/// This program does not return an error under normal circumstances.
 pub fn main() !void {
     // Integer example: 32-bit signed integer
     const my_int: i32 = 42;
@@ -21,4 +25,15 @@ pub fn main() !void {
 
     // Print string value
     std.debug.print("String: {s}\n", .{my_string});
+
+    // Iterate from 1 to 100 inclusive
+    // In Zig, the range syntax `1..101` creates an exclusive range,
+    // meaning it includes 1 but excludes 101, giving us 1-100 inclusive.
+    for (1..101) |i| {
+        // Convert integer to float using Zig's builtin @floatFromInt
+        // This converts i32 to f64 (default float type)
+        const float_value: f64 = @floatFromInt(i);
+
+        std.debug.print("Integer: {} -> Float: {:.2}\n", .{ i, float_value });
+    }
 }

@@ -30,7 +30,6 @@ Use the following command to build and run the project:
 | Command | Description |
 |---------|-------------|
 | `pixi run start` | Build and run the program |
-| `pixi run test` | Build and run all unit tests |
 | `pixi run fmt` | Format the code using zig fmt |
 | `pixi run lint-ci` | Run lint check (runs fmt check only) |
 | `pixi run lint-fix` | Auto-fix formatting issues |

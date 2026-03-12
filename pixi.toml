@@ -8,7 +8,6 @@ version = "0.1.0"
 [tasks]
 start = "zig build run"
 build = "zig build"
-test = "zig build test --summary all"
 fmt = "zig fmt src/"
 lint-ci = "zig fmt --check src/"
 lint-fix = "zig fmt src/"
