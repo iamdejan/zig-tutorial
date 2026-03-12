@@ -48,19 +48,6 @@ pub fn safeMemoryManagement(allocator: std.mem.Allocator) !void {
     @memcpy(buffer[0..message.len], message);
 }
 
-/// Demonstrates:
-/// - Basic variable types in Zig: integer, float, and string.
-/// This program shows how to declare and print variables of different types.
-/// It does not return an error under normal circumstances.
-/// - A for-loop that iterates from 1 to 100 (inclusive),
-/// converting each integer to a float using @floatFromInt.
-/// This program does not return an error under normal circumstances.
-/// - A for-loop that iterates over an array/slice of strings,
-/// printing each message to the console.
-/// This program does not return an error under normal circumstances.
-/// - A recursive Fibonacci function that computes the nth Fibonacci number.
-/// This program demonstrates the function by printing the first 15 Fibonacci numbers.
-/// It does not return an error under normal circumstances.
 pub fn main() !void {
     // Integer example: 32-bit signed integer
     const my_int: i32 = 42;
@@ -112,4 +99,56 @@ pub fn main() !void {
         const result = fibonacci(@intCast(i));
         std.debug.print("fibonacci({}) = {}\n", .{ i, result });
     }
+
+    // Example: Manual memory allocation using different allocator types
+    // Zig provides several built-in allocator types for different use cases
+    std.debug.print("\nManual memory allocation examples with different allocators:\n", .{});
+
+    // 1. Page allocator - allocates memory in page-sized blocks
+    std.debug.print("\n1. Page allocator:\n", .{});
+    const page_array = try std.heap.page_allocator.alloc(i32, 5);
+    defer std.heap.page_allocator.free(page_array);
+    for (0..page_array.len) |i| {
+        page_array[i] = @intCast(i * 10);
+    }
+    std.debug.print("   Allocated array: ", .{});
+    for (page_array) |value| {
+        std.debug.print("{} ", .{value});
+    }
+    std.debug.print("\n", .{});
+
+    // 2. Arena allocator - collects all allocations and frees them at once
+    std.debug.print("\n2. Arena allocator:\n", .{});
+    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+    defer arena.deinit();
+    const arena_allocator = arena.allocator();
+    const arena_array1 = try arena_allocator.alloc(i32, 3);
+    const arena_array2 = try arena_allocator.alloc(i32, 4);
+    for (0..arena_array1.len) |i| {
+        arena_array1[i] = @intCast(i * 20);
+    }
+    for (0..arena_array2.len) |i| {
+        arena_array2[i] = @intCast(i * 30);
+    }
+    std.debug.print("   Arena array 1: ", .{});
+    for (arena_array1) |value| {
+        std.debug.print("{} ", .{value});
+    }
+    std.debug.print("\n   Arena array 2: ", .{});
+    for (arena_array2) |value| {
+        std.debug.print("{} ", .{value});
+    }
+    std.debug.print("\n   (Memory will be freed all at once when arena.deinit() is called)\n", .{});
+
+    // 3. Fixed buffer allocator - allocates from a fixed-size buffer
+    std.debug.print("\n3. Fixed buffer allocator:\n", .{});
+    var buffer: [20]u8 = undefined;
+    var fixed_allocator = std.heap.FixedBufferAllocator.init(&buffer);
+    const fb_allocator = fixed_allocator.allocator();
+    const fb_slice = try fb_allocator.alloc(u8, 17);
+    @memcpy(fb_slice, "Fixed buffer test");
+    std.debug.print("   Allocated slice: \"{s}\"\n", .{fb_slice});
+    std.debug.print("   Buffer size: {} bytes\n", .{buffer.len});
+    std.debug.print("   Allocated: {} bytes\n", .{fb_slice.len});
+    std.debug.print("   Remaining: {} bytes\n", .{fixed_allocator.end_index});
 }
