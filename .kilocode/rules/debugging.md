@@ -7,4 +7,4 @@ The consequence is that every Zig command you want to run should be run under `p
 - Run all unit tests: instead of `zig build test`, you should run `pixi run zig build test`.
   - In the case of running all unit tests, you should follow the rule under [code_validation.md](./code_validation.md).
 - Run the program: instead of `zig build run`, you should run `pixi run zig build run`.
-  In the case of running the program (or the main function), you should execute `pixi run start` instead, following the task defined in [pixi.toml](../../pixi.toml).
+  - In the case of running the program (or the main function), you should execute `pixi run start` instead, following the task defined in [pixi.toml](../../pixi.toml).
