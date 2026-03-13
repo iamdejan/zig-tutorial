@@ -49,9 +49,11 @@ Root/
 │       ├── pr-pipeline.yaml
 │       └── trunk-pipeline.yaml
 ├── .kilocode/              # Kilo Code assistant rules
+│   ├── mcp.json
 │   └── rules/
 │       ├── code_generation.md
 │       └── code_validation.md
+│       └── debugging.md
 ├── src/                    # Source code directory
 │   ├── main.zig            # Main entry point
 │   ├── tests.zig           # Test aggregation file (re-exports all tests)
