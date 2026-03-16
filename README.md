@@ -18,6 +18,17 @@ Before running this program, ensure you have the following installed:
    pixi run pre-commit install --hook-type pre-push
    ```
 
+4. **Node.js and npm** - Required for running MCP servers via `npx`. Install Node.js (which includes npm) from [https://nodejs.org/](https://nodejs.org/) or use your system package manager:
+   - **Ubuntu/Debian**: `sudo apt-get install nodejs npm`
+   - **macOS**: `brew install node`
+   - **Windows**: Download from [https://nodejs.org/](https://nodejs.org/)
+
+   After installation, verify with:
+   ```bash
+   node --version
+   npm --version
+   ```
+
 ## Run the Program
 
 Use the following command to build and run the project:
@@ -41,6 +52,9 @@ Use the following command to build and run the project:
 Root/
 ├── pixi.toml               # Pixi workspace configuration
 ├── pixi.lock               # Pixi lockfile
+├── build.zig               # Zig build script
+├── LICENSE.txt             # Project license
+├── AGENTS.md               # Agent rules and guidelines
 ├── .gitignore              # Git ignore rules
 ├── .gitattributes          # Git attributes
 ├── .editorconfig           # Editor configuration
@@ -49,11 +63,7 @@ Root/
 │       ├── pr-pipeline.yaml
 │       └── trunk-pipeline.yaml
 ├── .kilocode/              # Kilo Code assistant rules
-│   ├── mcp.json
-│   └── rules/
-│       ├── code_generation.md
-│       └── code_validation.md
-│       └── debugging.md
+│   └── mcp.json
 ├── src/                    # Source code directory
 │   ├── main.zig            # Main entry point
 │   ├── tests.zig           # Test aggregation file (re-exports all tests)
@@ -87,4 +97,4 @@ This section explains the purpose of each file in the repository:
 | Directory | Description |
 |-----------|-------------|
 | [`.github/workflows/`](.github/workflows) | GitHub Actions workflow files for CI/CD pipelines. Contains `pr-pipeline.yaml` for pull request checks and `trunk-pipeline.yaml` for trunk-based development. |
-| [`.kilocode/rules/`](.kilocode/rules) | Kilo Code assistant rules for code generation and validation. Contains guidelines for writing well-documented Zig code. |
+| [`.kilocode/`](.kilocode) | Kilo Code assistant configuration. Contains `mcp.json` for MCP server setup. |
